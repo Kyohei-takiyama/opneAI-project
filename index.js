@@ -26,7 +26,10 @@ app.post("/chat", async (req, res) => {
   });
 
   const splitedText = response.data.choices[0].text.split("ください");
-  const replacedText = splitedText[1].replace(/\\n/gm, "");
+  const replacedText =
+    splitedText.length === 1
+      ? splitedText[0]
+      : splitedText[1].replace(/\\n/gm, "");
   console.log(replacedText.trim());
 
   res.json({ message: replacedText });
